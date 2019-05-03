@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "367411411207",
+    "firebase_url": "https://gumptionlabs-e30ef.firebaseio.com",
+    "project_id": "gumptionlabs-e30ef",
+    "storage_bucket": "gumptionlabs-e30ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:367411411207:android:82afed94faa1bcb4",
+        "android_client_info": {
+          "package_name": "com.example.gumptionlabs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "367411411207-ddu03nsp084vs0qljfaano37p66gftol.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gumptionlabs",
+            "certificate_hash": "032b192717a90e8a7556d51d7b12aefb787de1b1"
+          }
+        },
+        {
+          "client_id": "367411411207-a1he19lku1ljtrpgtehmkr865rc8e4c8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuYD4eqE77jc_PxOegf1cFy-HSxafX_Is"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "367411411207-a1he19lku1ljtrpgtehmkr865rc8e4c8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

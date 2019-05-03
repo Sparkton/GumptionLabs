@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".SignUpActivity">
+
+    <EditText
+        android:id="@+id/upEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="140dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="text"
+        android:paddingLeft="50dp"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/upPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginTop="20dp"
+        android:hint="Password"
+        android:layout_gravity="center_horizontal"
+        android:inputType="textPassword"
+        android:paddingLeft="50dp"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/upSignup"
+        android:layout_width="225dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:text="Sign Up with Email and Password"
+        android:layout_gravity="center_horizontal"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/upSignin"
+        android:layout_width="wrap_content"
+        android:layout_height="23dp"
+        android:layout_marginTop="20dp"
+        android:text="Already Have An Account ?  SIGN IN"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@android:color/holo_blue_dark" />
+<!--
+    <ProgressBar
+        android:id="@+id/upProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />-->
+
+</LinearLayout>
