@@ -1,6 +1,9 @@
 package com.example.gumptionlabs;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
@@ -36,12 +39,12 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener,GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     FirebaseAuth mAuth;
-    String imei,imei1;
+    String imei, imei1;
     EditText inEmailEt, inPasswordEt;
- //   ProgressBar inPbar;
+    //   ProgressBar inPbar;
     FirebaseUser user;
     GoogleSignInClient mGoogleAuth;
     int RC_SIGNIN = 0;
@@ -63,31 +66,29 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.inSignin).setOnClickListener(this);
         findViewById(R.id.inForgot).setOnClickListener(this);
         findViewById(R.id.gSignIn).setOnClickListener(this);
-       // username_header=findViewById(R.id.uname_header);
+        // username_header=findViewById(R.id.uname_header);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
 
-        mGoogleApiClient=new GoogleApiClient.Builder(this)
-                .enableAutoManage(this,this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        mGoogleAuth = GoogleSignIn.getClient(this,gso);
+        mGoogleAuth = GoogleSignIn.getClient(this, gso);
     }
 
-    private void gsignIn()
-    {
-        Intent signInIntent=Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        startActivityForResult(signInIntent,RC_SIGNIN);
+    private void gsignIn() {
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGNIN);
 
     }
 
     @Override
-    public void onActivityResult(int requestCode,int resultCode,Intent data)
-    {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         /*super.onActivityResult(requestCode,resultCode,data);
         if(requestCode==RC_SIGNIN){
             //GoogleSignInResult result=Auth.GoogleSignInApi.getSignInResultFromIntent(data);
@@ -121,17 +122,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public void handleSignInResult(GoogleSignInResult result)
-    {
-        if(result.isSuccess())
-        {
-            GoogleSignInAccount acct=result.getSignInAccount();
-            startActivity(new Intent(this,homeActivity.class));
+    public void handleSignInResult(GoogleSignInResult result) {
+        if (result.isSuccess()) {
+            GoogleSignInAccount acct = result.getSignInAccount();
+            startActivity(new Intent(this, homeActivity.class));
             //username_header.setText(acct.getDisplayName());
 
             //Toast.makeText(this, "hello" +acct.getDisplayName(), Toast.LENGTH_SHORT).show();
-        }
-        else {
+        } else {
 
         }
     }
@@ -169,19 +167,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-               // inPbar.setVisibility(View.GONE);
+                // inPbar.setVisibility(View.GONE);
                 if (task.isSuccessful()) {
                     finish();  //so that on pressing back from sign up we dont go back to login screen
                     user = mAuth.getCurrentUser();
-                    if(user.isEmailVerified())
-                    {
+                    if (user.isEmailVerified()) {
                         //Intent intent = new Intent(LoginActivity.this, /*HomePageActivity*/homeActivity.class);
                         //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  //So that we dont return to login screen after pressing back button
                         //startActivity(intent);
 
-                        boolean newuser= task.getResult().getAdditionalUserInfo().isNewUser();
-                        if(newuser)
-                        {
+                        boolean newuser = task.getResult().getAdditionalUserInfo().isNewUser();
+                        if (newuser) {
                             Toast.makeText(LoginActivity.this, "Welcome to Gumption Labs", Toast.LENGTH_SHORT).show();
                             //FirebaseUser user = mAuth.getCurrentUser();
                             finish();
@@ -189,12 +185,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         }
                         // Sign in success, update UI with the signed-in user's information
                         //Log.d("TAG", "signInWithCredential:success");
-                        else
-                        {
+                        else {
                             //check current imei
-                            TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-                            if(telephonyManager!=null)
-                                imei=telephonyManager.getDeviceId(); //permission requested in splash
+                            TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+                            if (telephonyManager != null)
+                                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                                    // TODO: Consider calling
+                                    //    ActivityCompat#requestPermissions
+                                    // here to request the missing permissions, and then overriding
+                                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                    //                                          int[] grantResults)
+                                    // to handle the case where the user grants the permission. See the documentation
+                                    // for ActivityCompat#requestPermissions for more details.
+                                    return;
+                                }
+                                imei = telephonyManager.getDeviceId(); //permission requested in splash
                             else
                             {
                                 imei="error";
