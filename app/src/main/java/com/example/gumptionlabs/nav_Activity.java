@@ -1,5 +1,6 @@
 package com.example.gumptionlabs;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,8 @@ public class nav_Activity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:{
                     Toast.makeText(getApplicationContext(), "Home", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), VideoPlayer.class);
+                    startActivity(intent);
                     return true;
                 }
 
